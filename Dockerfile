@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:latest AS build
+FROM golang:latest AS build
 ENV DOCKER_GEN_VERSION 0.7.4
 RUN git clone --depth 1 -q https://github.com/ddollar/forego.git /usr/src/forego
 RUN git clone --depth 1 -q -b ${DOCKER_GEN_VERSION} https://github.com/jwilder/docker-gen.git /usr/src/docker-gen
@@ -9,7 +9,7 @@ WORKDIR /usr/src/docker-gen
 RUN go get -d ./...
 RUN make
 
-FROM --platform=$BUILDPLATFORM nginx:1.19.3
+FROM nginx:1.19.3
 LABEL author="Jason Wilder <mail@jasonwilder.com>"
 LABEL maintainer="Hugo Haldi <hugo.haldi@gmail.com>"
 
