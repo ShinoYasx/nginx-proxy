@@ -10,8 +10,8 @@ RUN go get -d ./...
 RUN make
 
 FROM --platform=$BUILDPLATFORM nginx:1.19.3
-LABEL author="Jason Wilder mail@jasonwilder.com"
-LABEL maintainer="Hugo Haldi hugo.haldi@gmail.com"
+LABEL author="Jason Wilder <mail@jasonwilder.com>"
+LABEL maintainer="Hugo Haldi <hugo.haldi@gmail.com>"
 
 # Install wget and install/updates certificates
 RUN apt-get update \
@@ -27,8 +27,7 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
  && sed -i 's/worker_processes  1/worker_processes  auto/' /etc/nginx/nginx.conf
 
 # Install Forego
-COPY --from=build /usr/src/forego/forego /usr/local/bin/ 
-RUN chmod u+x /usr/local/bin/forego
+COPY --from=build /usr/src/forego/forego /usr/local/bin/
 
 COPY --from=build /usr/src/docker-gen/docker-gen /usr/local/bin/
 
