@@ -29,6 +29,8 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
 # Install Forego
 COPY --from=build /usr/src/forego/forego /usr/local/bin/
 
+ENV DOCKER_GEN_VERSION 0.7.4
+
 COPY --from=build /usr/src/docker-gen/docker-gen /usr/local/bin/
 
 COPY network_internal.conf /etc/nginx/
